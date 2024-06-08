@@ -23,7 +23,7 @@ def index():
                 <form action="/download" method="post">
                     <input type="text" name="url" placeholder="Enter YouTube URL" required>
                     <br><br>
-                    <button type="submit">Download</button>
+                    <button type="submit" class="submit" id="submit">Download</button>
                 </form>
             </div>
             <script src="static/main.js"></script>
@@ -31,26 +31,26 @@ def index():
         </html>
     ''')
 
-@app.route('/download', methods=['POST'])
-def download():
-    url = request.form['url']
-    yt = YouTube(url)
-    stream = yt.streams.filter(progressive=True, file_extension='mp4').first()
-    
-    # Create a temporary file
-    temp_dir = tempfile.gettempdir()
-    temp_file_path = os.path.join(temp_dir, f"{yt.title}.mp4")
-    stream.download(output_path=temp_dir, filename=f"{yt.title}.mp4")
-    
-    @after_this_request
-    def remove_file(response):
-        try:
-            os.remove(temp_file_path)
-        except Exception as error:
-            app.logger.error("Error removing downloaded file: %s", error)
-        return response
-
-    return send_file(temp_file_path, as_attachment=True, download_name=f"{yt.title}.mp4")
+# @app.route('/download', methods=['POST'])
+# def download():
+#     url = request.form['url']
+#     yt = YouTube(url)
+#     stream = yt.streams.filter(progressive=True, file_extension='mp4').first()
+#     
+#     # Create a temporary file
+#     temp_dir = tempfile.gettempdir()
+#     temp_file_path = os.path.join(temp_dir, f"{yt.title}.mp4")
+#     stream.download(output_path=temp_dir, filename=f"{yt.title}.mp4")
+#     
+#     @after_this_request
+#     def remove_file(response):
+#         try:
+#             os.remove(temp_file_path)
+#         except Exception as error:
+#             app.logger.error("Error removing downloaded file: %s", error)
+#         return response
+# 
+#     return send_file(temp_file_path, as_attachment=True, download_name=f"{yt.title}.mp4")
 
 if __name__ == '__main__':
     app.run(debug=True)

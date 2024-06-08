@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file, render_template_string, after_this_request
+from flask import Flask, request, send_file, render_template_string, after_this_request, redirect
 from pytube import YouTube
 import tempfile
 import os
@@ -26,6 +26,7 @@ def index():
                     <button type="submit">Download</button>
                 </form>
             </div>
+            <script src="static/main.js"></script>
         </body>
         </html>
     ''')

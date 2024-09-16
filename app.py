@@ -13,12 +13,12 @@ def index():
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>YouTube to MP4</title>
+            <title>iConverter ♻️</title>
             <link rel="stylesheet" href="/static/styles.css">
         </head>
         <body>
             <div class="container">
-                <h1>YT -> MP4 🎥</h1>
+                <h1>iConverter ♻️</h1>
                 <p>With this Youtube -> MP4 converter, <br>you can download any YouTube video<br> for completely <b>FREE</b>!</p>
                 <form id="download-form">
                     <input type="text" id="url" name="url" placeholder="Enter YouTube URL" required>
